@@ -7,7 +7,7 @@
     "url": "git+https://github.com/Youngju-Jang/youtube.git"
   },
   "scripts": {
-    "dev": "nodemon --exec babel-node index.js"
+    "dev": "nodemon --exec babel-node src/server.js"
   },
   "author": "Youngju Jang<joj1043@github.com>",
   "license": "MIT",
@@ -16,7 +16,8 @@
   },
   "homepage": "https://github.com/Youngju-Jang/youtube#readme",
   "dependencies": {
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.18.10",
