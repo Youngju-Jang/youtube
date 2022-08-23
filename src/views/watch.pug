@@ -1,7 +1,10 @@
 extends base.pug
 
 block content 
-    h3 #{video.views} #{video.views === 1 ? "view" : "views"}
+    div 
+        p=video.description
+        small=video.createdAt     
     a(href=`${video.id}/edit`) Edit Video &rarr;
-    // >> http://localhost:4000/videos/edit 으로 감
+    br
+    a(href=`${video.id}/delete`) Delete Video &rarr;
     
