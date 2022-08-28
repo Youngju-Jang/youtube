@@ -9,10 +9,14 @@ const userSchema = new mongoose.Schema({
   password: { type: String },
   name: { type: String },
   location: String,
+  videos: [{ type: mongoose.Schema.Types.ObjectId, ref: "Video" }],
 });
 
 userSchema.pre("save", async function () {
-  this.password = await bcrypt.hash(this.password, 5);
+  if (this.isModified("password")) {
+    // User의 password가 수정됐을때 true
+    this.password = await bcrypt.hash(this.password, 5);
+  }
 });
 
 const User = mongoose.model("User", userSchema);
