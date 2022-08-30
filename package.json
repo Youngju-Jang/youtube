@@ -7,7 +7,8 @@
     "url": "git+https://github.com/Youngju-Jang/youtube.git"
   },
   "scripts": {
-    "dev": "nodemon --exec babel-node src/init.js"
+    "dev:server": "nodemon",
+    "dev:assets": "webpack --config webpack.config.js"
   },
   "author": "Youngju Jang<joj1043@github.com>",
   "license": "MIT",
@@ -26,6 +27,7 @@
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
     "node-fetch": "^2.6.6",
+    "node-sass": "^7.0.1",
     "pug": "^3.0.2"
   },
   "devDependencies": {
@@ -33,6 +35,15 @@
     "@babel/core": "^7.18.10",
     "@babel/node": "^7.18.10",
     "@babel/preset-env": "^7.18.10",
-    "nodemon": "^2.0.19"
+    "babel-loader": "^8.2.5",
+    "css-loader": "^6.7.1",
+    "mini-css-extract-plugin": "^2.6.1",
+    "nodemon": "^2.0.19",
+    "postcss-loader": "^7.0.1",
+    "sass": "^1.54.5",
+    "sass-loader": "^13.0.2",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0"
   }
 }
