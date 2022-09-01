@@ -5,6 +5,7 @@ module.exports = {
   entry: {
     main: "./src/client/js/main.js", // 변경할 src code위치
     videoPlayer: "./src/client/js/videoPlayer.js",
+    recorder: "./src/client/js/recorder.js",
   },
   plugins: [
     new MiniCssExtractPlugin({
