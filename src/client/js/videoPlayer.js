@@ -107,12 +107,7 @@ const handleSpaceBar = (event) => {
 
   const fullscreen = document.fullscreenElement;
   const key = event.key;
-  console.log(key);
-  if (key === "f") {
-    if (!fullscreen) {
-      videoContainer.requestFullscreen();
-    }
-  } else if (key === "Escape") {
+  if (key === "Escape") {
     if (fullscreen) {
       document.exitFullscreen();
     }
