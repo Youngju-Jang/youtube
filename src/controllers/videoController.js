@@ -1,6 +1,7 @@
 import Video from "../models/Video";
 import Comment from "../models/Comment";
 import User from "../models/User";
+import { reset } from "nodemon";
 
 //Video.find({}, (error, videos) => {});
 
@@ -16,12 +17,13 @@ export const home = async (req, res) => {
 };
 export const watch = async (req, res) => {
   const { id } = req.params;
-  const video = await Video.findById(id).populate("owner");
+  const video = await Video.findById(id).populate("owner").populate("comments");
   if (!video) {
-    return res.render("404", { pageTitle: "Video not found" });
+    return res.render("404", { pageTitle: "Video not found." });
   }
   return res.render("watch", { pageTitle: video.title, video });
 };
+
 export const getEdit = async (req, res) => {
   const { id } = req.params;
   const {
@@ -138,16 +140,40 @@ export const createComment = async (req, res) => {
     body: { text },
     params: { id },
   } = req;
-
   const video = await Video.findById(id);
   if (!video) {
     return res.sendStatus(404);
   }
-
   const comment = await Comment.create({
     text,
     owner: user._id,
     video: id,
   });
-  return res.sendStatus(201);
+  video.comments.push(comment._id);
+  video.save();
+  return res.status(201).json({ newCommentId: comment._id });
+};
+
+export const deleteComment = async (req, res) => {
+  const {
+    session: { user },
+    params: { id: commentId },
+  } = req;
+  console.log("deleteComment >>>>>>>>>", commentId);
+  const comment = await Comment.findById(commentId).populate("owner");
+  console.log(comment);
+  const videoId = comment.video;
+  const video = await Video.findById(videoId);
+  if (!comment || !video) {
+    return res.sendStatus(404);
+  }
+  if (String(comment.owner._id) !== String(user._id)) {
+    req.flash("error", "Not authorized");
+    return res.status(403).redirect("/");
+  }
+  video.comments.splice(video.comments.indexOf(commentId), 1);
+  await video.save();
+  await Comment.findByIdAndDelete(commentId);
+
+  return res.sendStatus(200);
 };
