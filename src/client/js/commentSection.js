@@ -47,7 +47,6 @@ const handleSubmit = async (event) => {
   }
 };
 const handleDelete = async (event) => {
-  console.log("start");
   const li = event.target.parentElement;
   const {
     dataset: { id: commentId },
@@ -55,7 +54,6 @@ const handleDelete = async (event) => {
   const response = await fetch(`/api/deleteComment/${commentId}`, {
     method: "DELETE",
   });
-  console.log("delete success");
   li.remove();
   //window.location.reload();
 };

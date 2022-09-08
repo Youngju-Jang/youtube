@@ -14,8 +14,8 @@ module.exports = {
       filename: "css/styles.css",
     }),
   ],
-  mode: "development",
-  watch: true,
+  //mode: "development",
+  // watch: true, // development 에서만 true여야함
   output: {
     filename: "js/[name].js", // 결과물 어디다 넣을건지
     path: path.resolve(__dirname, "assets"),
