@@ -1,7 +1,6 @@
 import Video from "../models/Video";
 import Comment from "../models/Comment";
 import User from "../models/User";
-import { reset } from "nodemon";
 
 //Video.find({}, (error, videos) => {});
 
