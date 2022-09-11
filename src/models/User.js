@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
   socialOnly: { type: Boolean, default: false },
   username: { type: String, required: true, unique: true },
   password: { type: String },
-  name: { type: String },
+  name: { type: String, required: true },
   location: String,
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
   videos: [{ type: mongoose.Schema.Types.ObjectId, ref: "Video" }],
@@ -15,7 +15,6 @@ const userSchema = new mongoose.Schema({
 
 userSchema.pre("save", async function () {
   if (this.isModified("password")) {
-    // User의 password가 수정됐을때 true
     this.password = await bcrypt.hash(this.password, 5);
   }
 });
