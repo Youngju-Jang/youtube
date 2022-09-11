@@ -102,6 +102,7 @@ export const postLogin = async (req, res) => {
 };
 
 export const startGithubLogin = (req, res) => {
+  console.log("@@@@@@@@@@@@@@@@startGithubLogin start@@@@@@@@@@@@@@@@");
   const baseUrl = `https://github.com/login/oauth/authorize`;
   const config = {
     client_id: process.env.GH_CLIENT,
@@ -110,6 +111,7 @@ export const startGithubLogin = (req, res) => {
   };
   const params = new URLSearchParams(config).toString();
   const finalUrl = `${baseUrl}?${params}`;
+  console.log("@@@@@@@@@@@@@@@@startGithubLogin end@@@@@@@@@@@@@@@@");
   return res.redirect(finalUrl);
 };
 
