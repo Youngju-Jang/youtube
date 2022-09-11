@@ -114,6 +114,7 @@ export const startGithubLogin = (req, res) => {
 };
 
 export const finishGithubLogin = async (req, res) => {
+  console.log("@@@@@@@@@@@@@@@@finishGithubLogin@@@@@@@@@@@@@@@@");
   const baseURL = `https://github.com/login/oauth/access_token`;
   const config = {
     client_id: process.env.GH_CLIENT,
@@ -132,6 +133,7 @@ export const finishGithubLogin = async (req, res) => {
     })
   ).json();
   if ("access_token" in tokenRequest) {
+    console.log("@@@@@@@@@@@@@@@@access_token@@@@@@@@@@@@@@@@");
     // access api
     const { access_token } = tokenRequest;
     const apiUrl = "https://api.github.com";
@@ -175,10 +177,12 @@ export const finishGithubLogin = async (req, res) => {
       });
     }
     // create an account
+    console.log("@@@@@@@@@@@@@@@@loggedIn = true@@@@@@@@@@@@@@@@");
     req.session.loggedIn = true;
     req.session.user = user;
     return res.redirect("/");
   } else {
+    console.log("@@@@@@@@@@@@@@@@user false@@@@@@@@@@@@@@@@");
     return res.redirect("/login");
   }
 };
